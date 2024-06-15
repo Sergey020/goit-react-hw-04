@@ -1,8 +1,12 @@
-import { Toaster } from "react-hot-toast";
+
 import "./App.css";
-import SearchBar from "./components/SearchBar/SearchBar";
+import {SearchBar} from "./components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
 import { getPhotos } from "./apiServise/photos";
+import {ImageGallery} from "./components/ImageGallery/ImageGallery";
+import {Toaster } from "react-hot-toast";
+import {Loader} from "./components/Loaeder/Loader";
+import {ErrorMessage} from "./components/ErrorMessage/ErrorMessage";
 
 function App() {
   const [images, setImages] = useState([]);
@@ -43,7 +47,12 @@ console.log(isVisible);
   return (
     <>
       <SearchBar onSubmit={onHandleSubmit} />
-      <Toaster />
+      <Toaster/>
+      {images.length > 0 && <ImageGallery images={images}/>}
+      {!images.length && !empty}
+      {isLoding && <Loader />}
+      {/* {error && <ErrorMessage/>} */}
+
     </>
   );
 }
