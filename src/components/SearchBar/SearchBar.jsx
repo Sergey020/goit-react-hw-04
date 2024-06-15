@@ -2,10 +2,10 @@ import { useState } from "react"
 import { toast } from 'react-hot-toast'
 
 const SearchBar = ({onSubmit}) => {
-    const [searchQuery,setsearchQuery] = useState("")
+    const [searchQuery,setSearchQuery] = useState("")
 
     const handleChenge = (event) => {
-        setsearchQuery(event.target.value)
+        setSearchQuery(event.target.value)
     }
 
     const handleSubmit = (event) => {
@@ -14,6 +14,7 @@ const SearchBar = ({onSubmit}) => {
             return toast.error("Can not be empty!")
         }
         onSubmit(searchQuery);
+        setSearchQuery("")
     }
 
 
