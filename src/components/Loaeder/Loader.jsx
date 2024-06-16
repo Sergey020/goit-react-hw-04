@@ -1,4 +1,4 @@
-
+import { Audio } from 'react-loader-spinner'
 const Loader = () => {
   return (
     <Audio

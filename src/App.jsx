@@ -1,12 +1,12 @@
 
 import "./App.css";
-import {SearchBar} from "./components/SearchBar/SearchBar";
+import SearchBar from "./components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
 import { getPhotos } from "./apiServise/photos";
-import {ImageGallery} from "./components/ImageGallery/ImageGallery";
-import {Toaster } from "react-hot-toast";
-import {Loader} from "./components/Loaeder/Loader";
-import {ErrorMessage} from "./components/ErrorMessage/ErrorMessage";
+import { Toaster } from "react-hot-toast";
+import Loader from "./components/Loaeder/Loader";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 
 function App() {
   const [images, setImages] = useState([]);
@@ -16,19 +16,19 @@ function App() {
   const [error, setError] = useState(null);
   const [empty, setEmpty] = useState(false);
   const [isVisible, setIsVisible] = useState(false)
-
+console.log(empty,setPage);
   useEffect(() => {
     if (!query) return;
 
     const getImages = async () => {
       setIsLoding(true);
       try {
-        const { photos, per_page, total_results } = await getPhotos(
+        const { results, per_page, total_results } = await getPhotos(
           query,
           page
         );
-        if(!photos.length) {return setEmpty(true)} 
-        setImages(prevImages => [...prevImages, ...photos])
+        if(!results.length) {return setEmpty(true)} 
+        setImages(prevImages => [...prevImages, ...results])
         setIsVisible (page < Math.ceil(total_results/per_page))
       } catch (error) {
         setError(error);
@@ -49,10 +49,10 @@ console.log(isVisible);
       <SearchBar onSubmit={onHandleSubmit} />
       <Toaster/>
       {images.length > 0 && <ImageGallery images={images}/>}
-      {!images.length && !empty}
+      {/* {!images.length && !empty} */}
       {isLoding && <Loader />}
-      {/* {error && <ErrorMessage/>} */}
-
+      {error && <ErrorMessage/>}
+      {/* {empty && <Text textAlign="center">Sorry. There are no images ... 😭</Text>} */}
     </>
   );
 }
