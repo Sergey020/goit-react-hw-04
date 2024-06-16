@@ -1,8 +1,11 @@
-/* eslint-disable no-irregular-whitespace */
-const ImageCard = ({ urls, description }) => {
+const ImageCard = ({ urls, description, onImageClick }) => {
   return (
     <li>
-      <img src={urls.small} alt={description} />
+      <img
+        src={urls.small}
+        alt={description}
+        onClick={() => onImageClick(urls.regular)}
+      />
     </li>
   );
 };
