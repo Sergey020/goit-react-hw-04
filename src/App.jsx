@@ -68,9 +68,11 @@ function App() {
   const onHandleSubmit = (searchQuery) => {
     setImages([]);
     setPage(1);
-    // console.log(searchQuery);
+    setIsLoding(false);
+    setError(null);
+    setEmpty(false);
     setQuery(searchQuery);
-  };
+    };
   console.log(isVisible);
   const loadMore = () => {
     setPage((prevPage) => prevPage + 1);
